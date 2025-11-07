@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FATHAH V | FULL STACK DEVELOPER</title>
+    <meta name="description" content="Clean portfolio with dark mode, AI chatbot, and built-in admin mode." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
+            keyframes: {
+              fadeInUp: { '0%': { opacity: 0, transform: 'translateY(8px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+              blob: { '0%': { transform: 'translate(0, 0) scale(1)' }, '33%': { transform: 'translate(4px, -6px) scale(1.02)' }, '66%': { transform: 'translate(-6px, 6px) scale(0.98)' }, '100%': { transform: 'translate(0, 0) scale(1)' } }
+            },
+            animation: { fadeInUp: 'fadeInUp .6s ease both', blob: 'blob 10s ease-in-out infinite' }
+          }
+        },
+        darkMode: 'class'
+      };
+    </script>
+
+    <style>
+      :root { --accent: 38 92% 50%; }
+      .accent-bg { background-color: hsl(var(--accent)); }
+      .accent { color: hsl(var(--accent)); }
+      .accent-border { border-color: hsl(var(--accent)); }
+      .accent-ring { --tw-ring-color: hsl(var(--accent) / .4); }
+      .focus-ring:focus-visible { outline: none; box-shadow: 0 0 0 4px hsl(var(--accent) / .25); }
+      ::-webkit-scrollbar { width: 10px; height: 10px; }
+      ::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 999px; }
+      html.dark ::-webkit-scrollbar-thumb { background: #3f3f46; }
+      .card-hover{transition:box-shadow .2s, transform .2s}
+      .card-hover:hover{transform:translateY(-2px)}
+    </style>
+  </head>
+
+  <body class="bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 antialiased">
+    <!-- Skip link -->
+    <a href="#main" class="sr-only focus:not-sr-only focus-ring absolute left-3 top-3 z-50 rounded-lg bg-white/90 px-3 py-2 text-sm shadow dark:bg-zinc-800/90">Skip to content</a>
+
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-40 px-4 py-3">
+      <div class="mx-auto max-w-6xl">
+        <div class="rounded-full border border-zinc-200/80 bg-white/90 px-4 shadow-sm backdrop-blur dark:border-zinc-700/60 dark:bg-zinc-900/80">
+          <div class="flex h-14 items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+              <span aria-hidden class="h-8 w-8 rounded-xl accent-bg shadow-sm"></span>
+              <span class="font-semibold tracking-tight group-hover:opacity-80">FATHAH</span>
+            </a>
+
+            <nav aria-label="Primary" class="hidden gap-6 md:flex">
+              <a href="#work" class="hover:opacity-80">Work</a>
+              <a href="#skills" class="hover:opacity-80">Skills</a>
+              <a href="#about" class="hover:opacity-80">About</a>
+              <a href="#contact" class="hover:opacity-80">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-2">
+              <!-- Theme Toggle -->
+              <button id="themeToggle" class="focus-ring relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 bg-white shadow-[inset_0_1px_1px_rgba(0,0,0,0.04)] hover:bg-zinc-50 dark:border-zinc-700/80 dark:bg-zinc-900 dark:hover:bg-zinc-800" aria-label="Toggle dark mode">
+                <svg id="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3c.2 0 .4.12.48.31a.5.5 0 0 1-.12.56a7 7 0 0 0 8.56 8.56a.5.5 0 0 1 .56-.12c.19.08.31.28.31.48"/></svg>
+                <svg id="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute hidden h-5 w-5"><path fill="currentColor" d="M12 18a6 6 0 1 0 0-12a6 6 0 0 0 0 12m0 4a1 1 0 0 1-1-1v-1a1 1 0 1 1 2 0v1a1 1 0 0 1-1 1m0-18a1 1 0 0 1-1-1V2a1 1 0 1 1 2 0v1a1 1 0 0 1-1 1m10 9a1 1 0 0 1-1-1h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1m-18 0a1 1 0 0 1-1-1H2a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1m15.07 7.07a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 1 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41M6.05 6.05A1 1 0 0 1 7.46 7.46l-.71.71a1 1 0 0 1-1.41-1.41zm12.02-2.12a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 1 1-1.41-1.41zM4.23 18.36a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1-1.41 1.41z"/></svg>
+              </button>
+
+              <!-- Chatbot Toggle (hidden on mobile) -->
+              <button id="chatToggle" class="hidden md:inline-flex focus-ring items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-2 text-sm font-medium shadow-[inset_0_1px_1px_rgba(0,0,0,0.04)] hover:bg-zinc-50 dark:border-zinc-700/80 dark:bg-zinc-900 dark:hover:bg-zinc-800">
+                <span class="i">💬</span><span class="hidden sm:inline">AI Chatbot</span>
+              </button>
+
+              <!-- Mobile menu button -->
+              <button id="menuToggle" aria-label="Open menu" class="md:hidden focus-ring inline-flex items-center justify-center rounded-full border border-zinc-200 bg-white p-2 shadow-[inset_0_1px_1px_rgba(0,0,0,0.04)] hover:bg-zinc-50 dark:border-zinc-700/80 dark:bg-zinc-900 dark:hover:bg-zinc-800">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <nav id="mobileMenu" class="fixed inset-0 z-50 hidden bg-white/95 backdrop-blur dark:bg-zinc-950/95">
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="flex h-16 items-center justify-between border-b border-zinc-200 dark:border-zinc-800">
+          <span class="font-semibold">Menu</span>
+          <button id="menuClose" class="rounded-lg px-2 py-1 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">✕</button>
+        </div>
+        <ul class="mt-4 space-y-2 text-lg">
+          <li><a data-close-menu href="#work" class="block rounded-xl px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800">Work</a></li>
+          <li><a data-close-menu href="#skills" class="block rounded-xl px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800">Skills</a></li>
+          <li><a data-close-menu href="#about" class="block rounded-xl px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800">About</a></li>
+          <li><a data-close-menu href="#contact" class="block rounded-xl px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800">Contact</a></li>
+          <li><a data-close-menu href="/?admin" class="block rounded-xl px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800">Admin</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main" class="relative">
+      <!-- Background dots -->
+      <canvas id="bgDots" class="pointer-events-none fixed inset-0 -z-10"></canvas>
+
+      <!-- HERO -->
+      <section class="mx-auto max-w-6xl px-4 pt-20 pb-16 md:pt-28 text-center">
+        <div class="space-y-6 animate-fadeInUp max-w-3xl mx-auto">
+          <h1 class="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">Hi, I'm <span class="accent">ABDUL FATHAH</span></h1>
+          <p class="max-w-prose mx-auto text-lg text-zinc-600 dark:text-zinc-300">A Full Stack PYTHON Developer focused on backend logic.</p>
+          <div class="flex flex-wrap gap-3 justify-center">
+            <a href="#contact" class="focus-ring inline-flex items-center justify-center rounded-xl border border-zinc-200 bg-white px-6 py-2 text-sm font-semibold shadow-sm hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800">Hire Me</a>
+            <a href="/assets/resume.pdf" download class="focus-ring inline-flex items-center justify-center rounded-xl border border-zinc-200 bg-white px-6 py-2 text-sm font-semibold shadow-sm hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800">Get Resume</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- PUBLIC WORK (dynamic) -->
+      <section id="work" class="mx-auto max-w-6xl px-4 py-16 border-t border-zinc-200 dark:border-zinc-800">
+        <div class="flex items-end justify-between">
+          <h2 class="text-2xl font-bold">Project Highlights</h2>
+          <a href="/?admin" class="text-sm text-zinc-600 underline-offset-4 hover:underline dark:text-zinc-300"></a>
+        </div>
+
+        <!-- Replaces static cards -->
+        <div id="projectsGrid" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+      </section>
+
+      <!-- ADMIN MODE (same file, toggled by ?admin) -->
+      <section id="adminView" class="mx-auto hidden max-w-6xl px-4 py-16 border-t border-zinc-200 dark:border-zinc-800">
+        <div class="flex items-end justify-between">
+          <h2 class="text-2xl font-bold">Admin Dashboard</h2>
+          <a href="/" class="text-sm text-zinc-600 underline-offset-4 hover:underline dark:text-zinc-300">← Back to site</a>
+        </div>
+
+        <!-- Login -->
+        <div id="authBox" class="mt-6 max-w-md rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+          <p class="text-sm text-zinc-600 dark:text-zinc-400">Enter password:</p>
+          <div class="mt-3 flex items-center gap-2">
+            <input id="adminPass" type="password" class="w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm dark:border-zinc-800 dark:bg-zinc-950" placeholder="Password" />
+            <button id="loginBtn" class="rounded-xl bg-zinc-900 px-3 py-2 text-sm font-medium text-white hover:opacity-95 dark:bg-zinc-100 dark:text-zinc-900">Login</button>
+          </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashBox" class="mt-6 hidden">
+          <div class="grid gap-4 sm:grid-cols-3">
+            <div class="rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"><div class="text-xs text-zinc-500">Total Projects</div><div id="statCount" class="mt-1 text-2xl font-semibold">0</div></div>
+            <div class="rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"><div class="text-xs text-zinc-500">Export</div><button id="exportBtn" class="mt-2 rounded-xl border border-zinc-200 px-3 py-2 text-sm hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800">Download JSON</button></div>
+            <div class="rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"><div class="text-xs text-zinc-500">Import</div><label class="mt-2 inline-flex cursor-pointer items-center gap-2 rounded-xl border border-zinc-200 px-3 py-2 text-sm hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800">Choose file<input id="importInput" type="file" accept="application/json" class="hidden"/></label></div>
+          </div>
+
+          <!-- Form -->
+          <div class="mt-6 rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+            <h3 class="text-base font-semibold">Add / Edit Project</h3>
+            <form id="projectForm" class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <input name="id" type="hidden" />
+              <div>
+                <label class="text-xs text-zinc-500">Title</label>
+                <input name="title" required class="mt-1 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm dark:border-zinc-800 dark:bg-zinc-950" placeholder="SaaS Dashboard" />
+              </div>
+              <div>
+                <label class="text-xs text-zinc-500">Tech (comma separated)</label>
+                <input name="tech" class="mt-1 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm dark:border-zinc-800 dark:bg-zinc-950" placeholder="Next.js, Tailwind" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="text-xs text-zinc-500">Description</label>
+                <textarea name="desc" rows="2" class="mt-1 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm dark:border-zinc-800 dark:bg-zinc-950" placeholder="Short summary..."></textarea>
+              </div>
+              <div>
+                <label class="text-xs text-zinc-500">Image URL</label>
+                <input name="image" class="mt-1 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm dark:border-zinc-800 dark:bg-zinc-950" placeholder="https://..." />
+              </div>
+              <div>
+                <label class="text-xs text-zinc-500">Project Link</label>
+                <input name="link" class="mt-1 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm dark:border-zinc-800 dark:bg-zinc-950" placeholder="https://example.com" />
+              </div>
+              <div class="sm:col-span-2 flex items-center gap-2 pt-1">
+                <button class="rounded-xl bg-zinc-900 px-3 py-2 text-sm font-medium text-white hover:opacity-95 dark:bg-zinc-100 dark:text-zinc-900" type="submit"><span id="submitText">Add Project</span></button>
+                <button id="resetBtn" type="button" class="rounded-xl border border-zinc-200 px-3 py-2 text-sm hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800">Reset</button>
+                <button id="logoutBtn" type="button" class="ml-auto rounded-xl border border-zinc-200 px-3 py-2 text-sm hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800">Logout</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- List -->
+          <div class="mt-6 grid gap-3" id="adminList"></div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" class="mx-auto max-w-6xl px-4 py-16 border-t border-zinc-200 dark:border-zinc-800">
+        <div class="flex items-end justify-between">
+          <h2 class="text-2xl font-bold">Technical Arsenal</h2>
+          <p class="text-sm text-zinc-600 dark:text-zinc-300">Skills</p>
+        </div>
+        <div class="mt-8 space-y-6">
+          <!-- (your original skills content kept as-is) -->
+          <div class="rounded-2xl border border-zinc-200/80 bg-white/70 p-4 shadow-sm backdrop-blur dark:border-zinc-800/80 dark:bg-zinc-900/70"><div class="mb-2 flex items-center justify-between"><div class="flex items-center gap-3"><span class="inline-grid h-6 w-6 place-items-center rounded-md bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">🐍</span><span class="font-medium">Python</span></div><span class="text-sm text-zinc-600 dark:text-zinc-400">95%</span></div><div class="h-2.5 w-full rounded-full bg-zinc-200 dark:bg-zinc-800"><div class="h-2.5 rounded-full accent-bg transition-[width] duration-700 ease-out" data-skill="95" style="width:0%"></div></div></div>
+          <div class="rounded-2xl border border-zinc-200/80 bg-white/70 p-4 shadow-sm backdrop-blur dark:border-zinc-800/80 dark:bg-zinc-900/70"><div class="mb-2 flex items-center justify-between"><div class="flex items-center gap-3"><span class="inline-grid h-6 w-6 place-items-center rounded-md bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">🗄️</span><span class="font-medium">MongoDB</span></div><span class="text-sm text-zinc-600 dark:text-zinc-400">90%</span></div><div class="h-2.5 w-full rounded-full bg-zinc-200 dark:bg-zinc-800"><div class="h-2.5 rounded-full accent-bg transition-[width] duration-700 ease-out" data-skill="90" style="width:0%"></div></div></div>
+          <div class="rounded-2xl border border-zinc-200/80 bg-white/70 p-4 shadow-sm backdrop-blur dark:border-zinc-800/80 dark:bg-zinc-900/70"><div class="mb-2 flex items-center justify-between"><div class="flex items-center gap-3"><span class="inline-grid h-6 w-6 place-items-center rounded-md bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">🧩</span><span class="font-medium">Node.js/Express</span></div><span class="text-sm text-zinc-600 dark:text-zinc-400">95%</span></div><div class="h-2.5 w-full rounded-full bg-zinc-200 dark:bg-zinc-800"><div class="h-2.5 rounded-full accent-bg transition-[width] duration-700 ease-out" data-skill="95" style="width:0%"></div></div></div>
+          <div class="rounded-2xl border border-zinc-200/80 bg-white/70 p-4 shadow-sm backdrop-blur dark:border-zinc-800/80 dark:bg-zinc-900/70"><div class="mb-2 flex items-center justify-between"><div class="flex items-center gap-3"><span class="inline-grid h-6 w-6 place-items-center rounded-md bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">⌘</span><div class="flex items-center gap-2"><span class="font-medium">Next JS </span><span class="rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-medium text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">Learning</span></div></div><span class="text-sm text-zinc-600 dark:text-zinc-400">50%</span></div><div class="h-2.5 w-full rounded-full bg-zinc-200 dark:bg-zinc-800"><div class="h-2.5 rounded-full accent-bg transition-[width] duration-700 ease-out" data-skill="50" style="width:0%"></div></div></div>
+          <div class="rounded-2xl border border-zinc-200/80 bg-white/70 p-4 shadow-sm backdrop-blur dark:border-zinc-800/80 dark:bg-zinc-900/70"><div class="mb-2 flex items-center justify-between"><div class="flex items-center gap-3"><span class="inline-grid h-6 w-6 place-items-center rounded-md bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">TS</span><div class="flex items-center gap-2"><span class="font-medium">TypeScript</span><span class="rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-medium text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">Learning</span></div></div><span class="text-sm text-zinc-600 dark:text-zinc-400">40%</span></div><div class="h-2.5 w-full rounded-full bg-zinc-200 dark:bg-zinc-800"><div class="h-2.5 rounded-full accent-bg transition-[width] duration-700 ease-out" data-skill="40" style="width:0%"></div></div></div>
+          <div class="rounded-2xl border border-zinc-200/80 bg-white/70 p-4 shadow-sm backdrop-blur dark:border-zinc-800/80 dark:bg-zinc-900/70"><div class="mb-2 flex items-center justify-between"><div class="flex items-center gap-3"><span class="inline-grid h-6 w-6 place-items-center rounded-md bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">🔧</span><span class="font-medium">Git</span></div><span class="text-sm text-zinc-600 dark:text-zinc-400">80%</span></div><div class="h-2.5 w-full rounded-full bg-zinc-200 dark:bg-zinc-800"><div class="h-2.5 rounded-full accent-bg transition-[width] duration-700 ease-out" data-skill="80" style="width:0%"></div></div></div>
+        </div>
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a href="/assets/resume.pdf" download class="focus-ring inline-flex items-center justify-center rounded-xl border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold shadow-sm hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800">Download Résumé</a>
+          <a href="#contact" class="focus-ring inline-flex items-center justify-center rounded-xl border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold shadow-sm hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800">Hire Me</a>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="mx-auto max-w-6xl px-4 py-16">
+        <h2 class="text-2xl font-bold">About</h2>
+        <div class="mt-6 grid gap-10 md:grid-cols-3">
+          <p class="md:col-span-2 text-zinc-700 dark:text-zinc-300">I'm a full‑stack developer focused on quality and maintainability. I love shipping fast yet robust features with sensible abstractions, and I keep a close eye on UX details.</p>
+          <ul class="space-y-3 text-sm text-zinc-700 dark:text-zinc-300">
+            <li>✔ 2+ years building web apps</li>
+            <li>✔ Performance & accessibility minded</li>
+            <li>✔ Strong product sense</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="mx-auto max-w-6xl px-4 py-16 border-t border-zinc-200 dark:border-zinc-800">
+        <h2 class="text-2xl font-bold">Contact</h2>
+        <form class="mt-6 grid gap-4 sm:grid-cols-2" onsubmit="event.preventDefault(); alert('Thanks! Form demo only.');">
+          <div class="sm:col-span-1"><label class="mb-1 block text-sm">Name</label><input required class="focus-ring w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 shadow-sm dark:border-zinc-700 dark:bg-zinc-900" placeholder="Your name" /></div>
+          <div class="sm:col-span-1"><label class="mb-1 block text-sm">Email</label><input type="email" required class="focus-ring w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 shadow-sm dark:border-zinc-700 dark:bg-zinc-900" placeholder="you@example.com" /></div>
+          <div class="sm:col-span-2"><label class="mb-1 block text-sm">Message</label><textarea required rows="5" class="focus-ring w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 shadow-sm dark:border-zinc-700 dark:bg-zinc-900" placeholder="Tell me about your project..."></textarea></div>
+          <div class="sm:col-span-2"><button class="focus-ring inline-flex items-center justify-center rounded-xl border border-zinc-200 bg-white px-4 py-2 font-semibold shadow-sm hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800" type="submit">Send</button></div>
+        </form>
+        <div class="mt-8 space-y-3 text-sm text-zinc-700 dark:text-zinc-300">
+          <a href="https://www.linkedin.com/in/abdul-fathah-a12460325?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800"><span class="text-xl">🔗</span><span>Connect on LinkedIn</span></a>
+          <a href="https://wa.me/YOURNUMBER" target="_blank" class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800"><span class="text-xl">💬</span><span>Chat on WhatsApp</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="mx-auto max-w-6xl px-4 py-10 text-sm text-zinc-600 dark:text-zinc-400">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-zinc-200 pt-6 dark:border-zinc-800">
+        <p>© <span id="year"></span> FATHAH. All rights reserved.</p>
+        <div class="flex items-center gap-4">
+          <a class="hover:opacity-80" href="#">GitHub</a>
+          <a class="hover:opacity-80" href="https://www.linkedin.com/in/abdul-fathah-a12460325?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">LinkedIn</a>
+          <a class="hover:opacity-80" href="#">Twitter</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- CHATBOT WIDGET (unchanged) -->
+    <button id="fabChat" aria-label="Open chat"
+        class="fixed bottom-6 right-6 z-40 md:hidden h-14 w-14 rounded-2xl accent-bg text-white shadow-xl transition hover:brightness-110">💬 
+    </button>
+    <section id="chatPanel" class="fixed bottom-6 right-6 z-50 hidden w-[92vw] max-w-md overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-900">
+      <header class="flex items-center justify-between border-b border-zinc-200 px-4 py-3 dark:border-zinc-800"><div class="flex items-center gap-2"><span class="h-2.5 w-2.5 rounded-full accent-bg"></span><p class="text-sm font-semibold">AI Assistant</p></div><div class="flex items-center gap-2"><button id="clearChat" class="text-xs text-zinc-600 underline-offset-2 hover:underline dark:text-zinc-300">Clear</button><button id="closeChat" class="rounded-lg px-2 py-1 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">✕</button></div></header>
+      <div id="chatScroll" class="max-h-[60vh] space-y-3 overflow-y-auto p-4"><div class="flex gap-3"><div class="grid h-8 w-8 place-items-center rounded-xl bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">🤖</div><div class="max-w-[80%] rounded-2xl border border-zinc-200 bg-white p-3 text-sm shadow-sm dark:border-zinc-700 dark:bg-zinc-900">Hi! I can answer questions about this portfolio and help you get in touch. How can I help?</div></div></div>
+      <form id="chatForm" class="border-t border-zinc-200 p-3 dark:border-zinc-800"><div class="flex items-end gap-2"><textarea id="chatInput" rows="1" placeholder="Type a message..." class="focus-ring max-h-40 min-h-[44px] flex-1 resize-none rounded-xl border border-zinc-300 bg-white p-3 text-sm shadow-sm dark:border-zinc-700 dark:bg-zinc-900"></textarea><button class="focus-ring rounded-xl border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold shadow-sm hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800" type="submit">Send</button></div><p class="mt-2 text-[11px] text-zinc-500 dark:text-zinc-400">Demo chatbot. Replace <code>mockReply</code> with your API call (instructions in code).</p></form>
+    </section>
+
+    <script>
+      // ===== Year =====
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      
+
+      // ===== Theme Setup =====
+      const html = document.documentElement;
+      const themeToggle = document.getElementById('themeToggle');
+      const sun = document.getElementById('sun');
+      const moon = document.getElementById('moon');
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) { html.classList.add('dark'); }
+      function updateThemeIcon(){ const darkOn = html.classList.contains('dark'); sun.classList.toggle('hidden', !darkOn); moon.classList.toggle('hidden', darkOn); }
+      updateThemeIcon();
+      themeToggle.addEventListener('click', () => { html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); updateThemeIcon(); });
+
+      // Animate skill bars when visible
+      const skillBars = document.querySelectorAll('[data-skill]');
+      const once = new Set();
+      const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { const el = e.target; if (!once.has(el)) { el.style.width = el.dataset.skill + '%'; once.add(el); } } }); }, { threshold: 0.35 });
+      skillBars.forEach(el => io.observe(el));
+
+      // ===== Chat Toggle Buttons =====
+      const chatToggle = document.getElementById('chatToggle');
+      const chatPanel = document.getElementById('chatPanel');
+      const closeChat = document.getElementById('closeChat');
+      const fabChat = document.getElementById('fabChat');
+      chatToggle?.addEventListener('click', () => chatPanel.classList.remove('hidden'));
+      fabChat?.addEventListener('click', () => chatPanel.classList.remove('hidden'));
+      closeChat?.addEventListener('click', () => chatPanel.classList.add('hidden'));
+
+      // Mobile menu logic
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuClose = document.getElementById('menuClose');
+      menuToggle?.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+      menuClose?.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+      mobileMenu.addEventListener('click', (e)=>{ if(e.target.matches('[data-close-menu]')) mobileMenu.classList.add('hidden'); });
+      window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') mobileMenu.classList.add('hidden'); });
+
+      // ===== Chatbot Logic (mock) =====
+      const chatForm = document.getElementById('chatForm');
+      const chatInput = document.getElementById('chatInput');
+      const chatScroll = document.getElementById('chatScroll');
+      const clearChat = document.getElementById('clearChat');
+      clearChat?.addEventListener('click', () => { chatScroll.innerHTML = ''; });
+      chatForm?.addEventListener('submit', async (e) => { e.preventDefault(); const text = chatInput.value.trim(); if (!text) return; pushMsg('user', text); chatInput.value = ''; const reply = await mockReply(text); pushMsg('bot', reply); });
+      function pushMsg(who, text){ const row = document.createElement('div'); row.className = 'flex gap-3'; const avatar = document.createElement('div'); avatar.className = 'grid h-8 w-8 place-items-center rounded-xl ' + (who === 'bot' ? 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300' : 'accent-bg text-white'); avatar.textContent = who === 'bot' ? '🤖' : '👤'; const bubble = document.createElement('div'); bubble.className = 'max-w-[80%] rounded-2xl border p-3 text-sm shadow-sm ' + (who === 'bot' ? 'border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-900' : 'accent-border bg-white dark:bg-zinc-950'); bubble.textContent = text; row.appendChild(avatar); row.appendChild(bubble); chatScroll.appendChild(row); chatScroll.scrollTo({ top: chatScroll.scrollHeight, behavior: 'smooth' }); }
+      async function mockReply(message){ const lower = message.toLowerCase(); if (/(hi|hello|hey)\b/.test(lower)) return 'Hello! 👋 How can I help with your project?'; if (/contact|email|hire/.test(lower)) return 'You can reach me via the contact form below or email me at hello@example.com'; if (/stack|tech|skills/.test(lower)) return 'I work with TypeScript, React/Next.js, Node.js, PostgreSQL, and Tailwind.'; if (/project|work/.test(lower)) return 'Check the “Project Highlights” section. I can share more case studies on request.'; return 'Got it. This is a demo bot. Connect your own API by replacing mockReply() with a fetch to your endpoint.'; }
+
+      // === Animated background dots ===
+      const canvas = document.getElementById('bgDots');
+      const ctx = canvas.getContext('2d'); let w, h;
+      function resize(){ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+      resize(); window.addEventListener('resize', resize);
+      const dots = Array.from({length: 60}, () => ({ x: Math.random()*w, y: Math.random()*h, r: 3+Math.random()*4, dx:(Math.random()-.5)*0.3, dy:(Math.random()-.5)*0.3, color:`hsla(${200+Math.random()*80},70%,60%,0.6)` }));
+      function animate(){ ctx.clearRect(0,0,w,h); for(const d of dots){ ctx.beginPath(); ctx.fillStyle=d.color; ctx.arc(d.x,d.y,d.r,0,Math.PI*2); ctx.fill(); d.x+=d.dx; d.y+=d.dy; if(d.x<0||d.x>w) d.dx*=-1; if(d.y<0||d.y>h) d.dy*=-1;} requestAnimationFrame(animate); }
+      animate();
+
+      // ============ Admin Mode + Project Store (LOCAL) ============
+      const KEY = 'portfolioProjects';
+      const DEFAULTS = [
+        { id: crypto.randomUUID(), title: 'SaaS Dashboard', desc: 'Analytics, billing, and auth in one place.', tech: ['Next.js','Tailwind'], image: '', link: '#' },
+        { id: crypto.randomUUID(), title: 'E‑commerce', desc: 'Headless storefront with blazing performance.', tech: ['Remix','Stripe'], image: '', link: '#' },
+        { id: crypto.randomUUID(), title: 'Mobile App', desc: 'React Native app with offline sync.', tech: ['React Native','SQLite'], image: '', link: '#' }
+      ];
+      const load = () => { try { const raw = localStorage.getItem(KEY); if(!raw){ localStorage.setItem(KEY, JSON.stringify(DEFAULTS)); return DEFAULTS; } const json = JSON.parse(raw); return Array.isArray(json) ? json : DEFAULTS; } catch { localStorage.setItem(KEY, JSON.stringify(DEFAULTS)); return DEFAULTS; } };
+      const save = (list) => localStorage.setItem(KEY, JSON.stringify(list));
+
+      // Public grid render
+      const grid = document.getElementById('projectsGrid');
+      function renderCards(){ const projects = load(); grid.innerHTML = projects.map(p => `
+        <article class="group rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm transition card-hover hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900">
+          ${p.image ? `<a href="${p.link||'#'}" target="_blank" rel="noreferrer" class="block aspect-[16/10] overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800"><img src="${p.image}" alt="${p.title}" class="h-full w-full object-cover"/></a>` : `<div class=\"aspect-[16/10] rounded-xl bg-zinc-100 dark:bg-zinc-800\"></div>`}
+          <h3 class="mt-4 font-semibold tracking-tight">${p.title}</h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400">${p.desc||''}</p>
+          <div class="mt-3 flex flex-wrap items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400">${(p.tech||[]).map(t => `<span class=\"rounded-full bg-zinc-100 px-2 py-1 dark:bg-zinc-800\">${t}</span>`).join('')}</div>
+        </article>`).join(''); }
+
+      // Route: show admin view if ?admin
+      const adminView = document.getElementById('adminView');
+      const isAdmin = new URLSearchParams(location.search).has('admin') || location.hash === '#admin';
+      if(isAdmin){ document.getElementById('work').classList.add('hidden'); adminView.classList.remove('hidden'); }
+
+      // Admin auth + CRUD
+      const PASSWORD = 'admin123'; // change this
+      const authBox = document.getElementById('authBox');
+      const dashBox = document.getElementById('dashBox');
+      const adminPass = document.getElementById('adminPass');
+      const loginBtn = document.getElementById('loginBtn');
+      const logoutBtn = document.getElementById('logoutBtn');
+      const statCount = document.getElementById('statCount');
+      const adminList = document.getElementById('adminList');
+      const form = document.getElementById('projectForm');
+      const submitText = document.getElementById('submitText');
+      const resetBtn = document.getElementById('resetBtn');
+      const exportBtn = document.getElementById('exportBtn');
+      const importInput = document.getElementById('importInput');
+
+      function fillForm(p){ form.id.value = p?.id || ''; form.title.value = p?.title || ''; form.desc.value = p?.desc || ''; form.tech.value = (p?.tech||[]).join(', '); form.image.value = p?.image || ''; form.link.value = p?.link || ''; submitText.textContent = p ? 'Save Changes' : 'Add Project'; }
+      function renderAdmin(){ const list = load(); statCount.textContent = list.length; adminList.innerHTML = list.map(p => `
+        <div class="flex items-start justify-between rounded-xl border border-zinc-200 p-3 dark:border-zinc-800">
+          <div>
+            <div class="font-medium">${p.title}</div>
+            <div class="text-xs text-zinc-500">${(p.tech||[]).join(', ')}</div>
+            ${p.link ? `<a class='text-xs underline' href='${p.link}' target='_blank' rel='noreferrer'>Preview</a>`:''}
+          </div>
+          <div class="flex items-center gap-2">
+            <button data-action="edit" data-id="${p.id}" class="rounded-lg px-2 py-1 hover:bg-zinc-100 dark:hover:bg-zinc-800">Edit</button>
+            <button data-action="delete" data-id="${p.id}" class="rounded-lg px-2 py-1 text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40">Delete</button>
+          </div>
+        </div>`).join(''); }
+
+      loginBtn?.addEventListener('click', ()=>{ if(adminPass.value===PASSWORD){ authBox.classList.add('hidden'); dashBox.classList.remove('hidden'); renderAdmin(); } else { alert('Wrong password'); } });
+      logoutBtn?.addEventListener('click', ()=>{ dashBox.classList.add('hidden'); authBox.classList.remove('hidden'); adminPass.value=''; });
+
+      adminList?.addEventListener('click', (e)=>{ const btn=e.target.closest('button'); if(!btn) return; const id=btn.dataset.id; const action=btn.dataset.action; const list=load(); if(action==='edit'){ const p=list.find(x=>x.id===id); if(p) fillForm(p); window.scrollTo({ top: 0, behavior: 'smooth' }); } if(action==='delete'){ if(confirm('Delete this project?')){ save(list.filter(x=>x.id!==id)); renderCards(); renderAdmin(); } } });
+
+      form?.addEventListener('submit', (e)=>{ e.preventDefault(); const fd = new FormData(form); const id = fd.get('id'); const title = String(fd.get('title')||'').trim(); if(!title) return alert('Title is required'); const desc = String(fd.get('desc')||'').trim(); const tech = String(fd.get('tech')||'').split(',').map(s=>s.trim()).filter(Boolean); const image = String(fd.get('image')||'').trim(); const link = String(fd.get('link')||'').trim(); const list = load(); if(id){ const i=list.findIndex(p=>p.id===id); if(i>=0) list[i] = { ...list[i], title, desc, tech, image, link }; } else { list.unshift({ id: crypto.randomUUID(), title, desc, tech, image, link }); } save(list); fillForm(); renderCards(); renderAdmin(); });
+      resetBtn?.addEventListener('click', ()=> fillForm());
+      exportBtn?.addEventListener('click', ()=>{ const blob = new Blob([JSON.stringify(load(), null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'projects.json'; a.click(); URL.revokeObjectURL(url); });
+      importInput?.addEventListener('change', async (e)=>{ const file = e.target.files?.[0]; if(!file) return; const text = await file.text(); try{ const json = JSON.parse(text); if(Array.isArray(json)){ save(json.map(it=>({ id: it.id || crypto.randomUUID(), title: it.title||'', desc: it.desc||'', tech: it.tech||[], image: it.image||'', link: it.link||'' }))); renderCards(); renderAdmin(); } else alert('Invalid JSON'); } catch{ alert('Failed to import JSON'); } e.target.value=''; });
+
+      // Initial public render
+      renderCards();
+    </script>
+  </body>
+</html>
